@@ -19,6 +19,7 @@ const ContainerNavBar = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 4px;
 
     img{
         width: 154px;
