@@ -52,7 +52,7 @@ export default function Menu(){
                 </div>
 
                 <div>
-                    <img src={Icon}/>
+                    <img src={Icon} alt="logo"/>
                 </div>
         </ContainerMenu>
     );
