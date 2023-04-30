@@ -1,8 +1,62 @@
 import styled from "styled-components";
-import DesignerPhoto from "../../assets/DesignerSection/designer_profile_photo.png";
-import BgDesigner from "../../assets/DesignerSection/designer_bg.png";
+import DesignerPhoto from "../../../assets/DesignerSection/designer_profile_photo.png";
+import BgDesigner from "../../../assets/DesignerSection/designer_bg.png";
+import ProductCardSmall from "../ComponentsProducts/ProductCardSmall";
+import { useEffect, useRef } from "react";
 
 export default function FeaturedDesignerSection(){
+    const swiperRef = useRef(null);
+
+    useEffect(() => {
+      const swiperContainer = swiperRef.current;
+      const params = {
+        slidesPerView: 2,
+        slidesPerGroup: 2,
+        spaceBetween: 10,
+        speed: 500,
+        pagination: true,
+        navigation: true,
+        injectStyles: [
+            `
+              .swiper-pagination-bullet{
+                width: 15px;
+                height: 15px;
+                background-color: #30775B;
+              }
+
+              .swiper-wrapper{
+                width: 450px;
+                height: 100%;
+              }
+
+              swiper-slide{
+                width: 220px;
+                height: 100%;
+              }
+
+              .swiper-button-prev,
+              .swiper-button-next {
+                width: 60px;
+                height: 60px;
+                background-color: white;
+                border-radius:50%;
+                box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
+                color: #30775B;
+              }
+
+              .swiper-button-prev:hover,
+              .swiper-button-next:hover{
+                background-color: #30775B;
+                color: white;
+              }
+          `,
+        ],
+      };
+  
+      Object.assign(swiperContainer, params);
+      swiperContainer.initialize();
+    }, []);
+
     return(
         <ContainerFeaturedDesigner>
             <div>
@@ -20,10 +74,20 @@ export default function FeaturedDesignerSection(){
             <div>
                 <p>Conheça os móveis do designer</p>
                 <div>
-                    <div/>
-                    <div/>
-                    <div/>
-                    <div/>
+                    <swiper-container ref={swiperRef} init="false">
+                        <swiper-slide>
+                            <ProductCardSmall/>
+                        </swiper-slide>
+                        <swiper-slide>
+                            <ProductCardSmall/>
+                        </swiper-slide>
+                        <swiper-slide>
+                            <ProductCardSmall/>
+                        </swiper-slide>
+                        <swiper-slide>
+                            <ProductCardSmall/>
+                        </swiper-slide>
+                    </swiper-container>     
                 </div>
             </div>
         </ContainerFeaturedDesigner>
@@ -46,14 +110,14 @@ const ContainerFeaturedDesigner = styled.div`
             align-items: center;
             justify-content: center;
 
-            img{
+            >img{
                 width: 300px;
                 height: 300px;
                 border-radius: 50%;
                 margin-bottom: 40px;
             }
 
-            h1{
+            >h1{
                 text-align: center;
                 font-family: 'Roboto', sans-serif;
                 font-style: normal;
@@ -63,7 +127,7 @@ const ContainerFeaturedDesigner = styled.div`
                 margin-bottom: 5px;
             }
 
-            p{
+            >p{
                 width: 360px;
                 text-align: center;
                 font-family: 'Roboto', sans-serif;
@@ -83,7 +147,7 @@ const ContainerFeaturedDesigner = styled.div`
             align-items: center;
             justify-content: center;
 
-            p{
+            >p{
                 width: 350px;
                 text-align: center;
                 font-family: 'Roboto', sans-serif;
@@ -96,51 +160,13 @@ const ContainerFeaturedDesigner = styled.div`
 
             >div:nth-of-type(1){
                 width: 100%;
-                position: relative;
-                height: 285px;
+                height: 320px;
                 display: flex;
                 justify-content: center;
-                gap: 0px 10px;
 
-                
-                >div:nth-of-type(1){
-                    width: 60px;
-                    height: 60px;
-                    border-radius: 50%;
-                    background-color: white;
-                    position: absolute;
-                    z-index: 1;
-                    right: 65px;
-                    top: 112.5px;
-                    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
-                    cursor: pointer;
-                    
-                    :hover{
-                        background-color: #30775B;
-                    }
-                }
-
-                >div:nth-of-type(2){
-                    width: 60px;
-                    height: 60px;
-                    border-radius: 50%;
-                    background-color: white;
-                    position: absolute;
-                    z-index: 1;
-                    left: 65px;
-                    top: 112.5px;
-                    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
-                    cursor: pointer;
-                    
-                    :hover{
-                        background-color: #30775B;
-                    }
-                }
-
-                div{
+                >div{
                     width: 220px;
                     height: 100%;
-                    background-color: grey;
                 }
             }
         }
