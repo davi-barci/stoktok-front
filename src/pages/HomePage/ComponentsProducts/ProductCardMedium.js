@@ -1,17 +1,16 @@
 import styled from "styled-components";
 import { AiOutlineHeart } from "react-icons/ai";
-import CadeiraTeste from "../../../assets/cadeira-teste.png";
 
-export default function ProductCardMedium(){
+export default function ProductCardMedium(props){
     return(
         <ContainerProductCard>
             <div>
                 <AiOutlineHeart/>
             </div>
-            <img src={CadeiraTeste}/>
-            <p>Kloe cadeira giratória</p>
+            <img src={props.image}/>
+            <p>{props.name}</p>
             <div>
-                <p>R$ 300,00</p>
+                <p>{`R$ ${Number(props.price).toFixed(2).replace('.', ',')}`}</p>
                 <div/>
             </div>
         </ContainerProductCard>
