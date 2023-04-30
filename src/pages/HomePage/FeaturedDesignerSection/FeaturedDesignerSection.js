@@ -2,10 +2,12 @@ import styled from "styled-components";
 import DesignerPhoto from "../../../assets/DesignerSection/designer_profile_photo.png";
 import BgDesigner from "../../../assets/DesignerSection/designer_bg.png";
 import ProductCardSmall from "../ComponentsProducts/ProductCardSmall";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
+import ProductsContext from "../../../contexts/Products.Context";
 
 export default function FeaturedDesignerSection(){
     const swiperRef = useRef(null);
+    const { products } = useContext(ProductsContext);
 
     useEffect(() => {
       const swiperContainer = swiperRef.current;
@@ -25,13 +27,13 @@ export default function FeaturedDesignerSection(){
               }
 
               .swiper-wrapper{
-                width: 450px;
-                height: 100%;
+                width: 500px;
+                height: 500px;
               }
 
               swiper-slide{
                 width: 220px;
-                height: 100%;
+                height: 320px;
               }
 
               .swiper-button-prev,
@@ -75,19 +77,12 @@ export default function FeaturedDesignerSection(){
                 <p>Conheça os móveis do designer</p>
                 <div>
                     <swiper-container ref={swiperRef} init="false">
-                        <swiper-slide>
-                            <ProductCardSmall/>
-                        </swiper-slide>
-                        <swiper-slide>
-                            <ProductCardSmall/>
-                        </swiper-slide>
-                        <swiper-slide>
-                            <ProductCardSmall/>
-                        </swiper-slide>
-                        <swiper-slide>
-                            <ProductCardSmall/>
-                        </swiper-slide>
-                    </swiper-container>     
+                        {(products !== null) && products.filter(prod => prod.category === "featured-designer").map((product, index) =>
+                                <swiper-slide key={index}>
+                                    <ProductCardSmall name={product.name} image={product.images[0]} price={product.price}/>
+                                </swiper-slide> 
+                        )}
+                    </swiper-container>  
                 </div>
             </div>
         </ContainerFeaturedDesigner>
@@ -166,7 +161,7 @@ const ContainerFeaturedDesigner = styled.div`
 
                 >div{
                     width: 220px;
-                    height: 100%;
+                    height: 320px;
                 }
             }
         }

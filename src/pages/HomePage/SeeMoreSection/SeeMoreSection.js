@@ -3,10 +3,12 @@ import SoftLineImage from "../../../assets/SoftSection/soft_line.png";
 import IluminationImage from "../../../assets/SoftSection/ilumination.png";
 import OrganizationImage from "../../../assets/SoftSection/organization.png";
 import ProductCardLarge from "../ComponentsProducts/ProductCardLarge";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
+import ProductsContext from "../../../contexts/Products.Context";
 
 export default function SeeMoreSection(){
     const swiperRef = useRef(null);
+    const { products } = useContext(ProductsContext);
 
     useEffect(() => {
       const swiperContainer = swiperRef.current;
@@ -66,12 +68,11 @@ export default function SeeMoreSection(){
                     <img src={IluminationImage}/>
                 </div>
                 <swiper-container ref={swiperRef} init="false">
-                    <swiper-slide>
-                        <ProductCardLarge/>
-                    </swiper-slide>
-                    <swiper-slide>
-                        <ProductCardLarge/>
-                    </swiper-slide>
+                    {(products !== null) && products.filter(prod => prod.category === "see-more").map((product, index) =>
+                          <swiper-slide key={index}>
+                              <ProductCardLarge name={product.name} image={product.images[0]} price={product.price}/>
+                          </swiper-slide> 
+                    )}
                 </swiper-container>
             </div>
         </ContainerSeeMore>

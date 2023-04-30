@@ -19,11 +19,16 @@ export default function ProductCardMedium(props){
 
 const ContainerProductCard = styled.div`
         width: 295px;
-        height: 100%;
-        background-color: #F4F0F0;
+        height: 350px;
+        margin-top: 5px;
+        background-color: white;
+        border-radius: 10px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 
         >div:nth-of-type(1){
             width: 100%;

@@ -1,17 +1,16 @@
 import styled from "styled-components";
 import { AiOutlineHeart } from "react-icons/ai";
-import CadeiraTeste from "../../../assets/cadeira-teste.png";
 
-export default function ProductCardLarge(){
+export default function ProductCardLarge(props){
     return(
         <ContainerProductCardLarge>
             <div>
                 <AiOutlineHeart/>
             </div>
-            <img src={CadeiraTeste}/>
-            <p>Kloe cadeira giratória</p>
+            <img src={props.image}/>
+            <p>{props.name}</p>
             <div>
-                <p>R$ 300,00</p>
+                <p>{`R$ ${Number(props.price).toFixed(2).replace('.', ',')}`}</p>
                 <div/>
             </div>
         </ContainerProductCardLarge>
@@ -19,12 +18,18 @@ export default function ProductCardLarge(){
 };
 
 const ContainerProductCardLarge = styled.div`
-            width: 430px;
-            height: 100%;
-            background-color: #F4F0F0;
+            width: 400px;
+            height: 430px;
+            margin-top: 12px;
+            margin-left: 11.5px;
+            background-color: white;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 
             >div:nth-of-type(1){
             width: 100%;
