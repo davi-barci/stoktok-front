@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import Room from "../../assets/Categories/room.png";
-import LivingRoom from "../../assets/Categories/living_room.png";
-import Office from "../../assets/Categories/office.png";
-import Kitchen from "../../assets/Categories/kitchen.png";
-import Bathroom from "../../assets/Categories/bathroom.png";
+import Room from "../../../assets/Categories/room.png";
+import LivingRoom from "../../../assets/Categories/living_room.png";
+import Office from "../../../assets/Categories/office.png";
+import Kitchen from "../../../assets/Categories/kitchen.png";
+import Bathroom from "../../../assets/Categories/bathroom.png";
 
 export default function Categories(){
     return (
