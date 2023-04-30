@@ -1,9 +1,11 @@
 import styled from "styled-components";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
 import ProductCardMedium from "../ComponentsProducts/ProductCardMedium";
+import ProductsContext from "../../../contexts/Products.Context";
 
 export default function NewsSection(){
     const swiperRef = useRef(null);
+    const { products } = useContext(ProductsContext);
 
     useEffect(() => {
       const swiperContainer = swiperRef.current;
@@ -23,7 +25,7 @@ export default function NewsSection(){
 
               .swiper-wrapper{
                 width: 100%;
-                height: 350px;
+                height: 400px;
                 margin-left: 12px;
               }
 
@@ -59,30 +61,11 @@ export default function NewsSection(){
             <p>Novidades para você</p>
             <div>
                 <swiper-container ref={swiperRef} init="false">
-                    <swiper-slide>
-                        <ProductCardMedium/>
-                    </swiper-slide> 
-                    <swiper-slide>
-                        <ProductCardMedium/>
-                    </swiper-slide> 
-                    <swiper-slide>
-                        <ProductCardMedium/>
-                    </swiper-slide> 
-                    <swiper-slide>
-                        <ProductCardMedium/>
-                    </swiper-slide>
-                    <swiper-slide>
-                        <ProductCardMedium/>
-                    </swiper-slide> 
-                    <swiper-slide>
-                        <ProductCardMedium/>
-                    </swiper-slide> 
-                    <swiper-slide>
-                        <ProductCardMedium/>
-                    </swiper-slide> 
-                    <swiper-slide>
-                        <ProductCardMedium/>
-                    </swiper-slide>  
+                    {(products !== null) && products.filter(prod => prod.category === "news").map((product, index) =>
+                        <swiper-slide key={index}>
+                            <ProductCardMedium name={product.name} image={product.images[0]} price={product.price}/>
+                        </swiper-slide> 
+                    )}
                 </swiper-container> 
             </div>
         </ContainerNews>
