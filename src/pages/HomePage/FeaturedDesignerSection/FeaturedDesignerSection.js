@@ -79,7 +79,7 @@ export default function FeaturedDesignerSection(){
                     <swiper-container ref={swiperRef} init="false">
                         {(products !== null) && products.filter(prod => prod.category === "featured-designer").map((product, index) =>
                                 <swiper-slide key={index}>
-                                    <ProductCardSmall name={product.name} image={product.images[0]} price={product.price}/>
+                                    <ProductCardSmall name={product.name} image={product.images[0]} price={product.price} id={product._id} discount={product.discount}/>
                                 </swiper-slide> 
                         )}
                     </swiper-container>  

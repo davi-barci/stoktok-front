@@ -6,6 +6,9 @@ import UserContext from "./contexts/UserContext";
 import ProductsContext from "./contexts/Products.Context";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ProductPage from "./pages/ProductPage/ProductPage";
+import Footer from './components/Footer/Footer';
+import NavBar from'./components/NavBar/NavBar';
 
 export default function App() {
   const [user, setUser] = useState(
@@ -27,19 +30,20 @@ export default function App() {
         alert("Ocorreu um erro durante a recuperação dos produtos. Por favor, tente novamente");
         window.location.reload();
       });
-
-      console.log(products);
   }, []);
 
   return (
     <BrowserRouter>
+      <NavBar />
       <UserContext.Provider value={{ user, setUser }}>
       <ProductsContext.Provider value={{products, setProducts}}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
         </Routes>
+        <Footer />
       </ProductsContext.Provider>
       </UserContext.Provider>
     </BrowserRouter>

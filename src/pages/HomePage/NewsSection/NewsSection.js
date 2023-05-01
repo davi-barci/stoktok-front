@@ -63,7 +63,7 @@ export default function NewsSection(){
                 <swiper-container ref={swiperRef} init="false">
                     {(products !== null) && products.filter(prod => prod.category === "news").map((product, index) =>
                         <swiper-slide key={index}>
-                            <ProductCardMedium name={product.name} image={product.images[0]} price={product.price}/>
+                            <ProductCardMedium name={product.name} image={product.images[0]} price={product.price} id={product._id} discount={product.discount}/>
                         </swiper-slide> 
                     )}
                 </swiper-container> 
