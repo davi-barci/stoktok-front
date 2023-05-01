@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Button from '@mui/material/Button';
+import bgLogin from "../assets/bglogin.png";
 
 export default function RegisterPage() {
   const [registerForm, setRegisterForm] = useState({
@@ -33,60 +35,127 @@ export default function RegisterPage() {
   return (
     <MainContainer>
       <div>
-        <h1>Quero criar uma conta Stok&Tok</h1>
-        <p>
-          Crie sua conta Tok&Stok agora e acesse promoções exclusivas, fique por
-          dentro das novidades e acompanhe suas compras!
-        </p>
+        <p>CADASTRAR</p>
+        <StyledForm onSubmit={handleSubmit}>
+          <label htmlFor="name">Nome:</label>
+          <input
+            value={registerForm.name}
+            onChange={handleForm}
+            disabled={isRegisterFormDisabled}
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Digite seu nome"
+            required
+          />
+          <label htmlFor="email">Email:</label>
+          <input
+            value={registerForm.email}
+            onChange={handleForm}
+            disabled={isRegisterFormDisabled}
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Digite seu e-mail"
+            required
+          />
+          <label htmlFor="password">Senha:</label>
+          <input
+            value={registerForm.password}
+            onChange={handleForm}
+            disabled={isRegisterFormDisabled}
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Digite sua senha"
+            required
+          />
+          <RegisterButton type="submit" disabled={isRegisterFormDisabled} style={{backgroundColor: "#30775b", color:"white", marginBottom: "25px"}}>
+            {isRegisterFormDisabled ? "..." : "Cadastrar"}
+          </RegisterButton>
+        </StyledForm>
+        <div>
+          <Link to={"/login"}>Já tem uma conta? Faça login!</Link>
+        </div>
       </div>
-      <StyledForm onSubmit={handleSubmit}>
-        <label htmlFor="name">Nome:</label>
-        <input
-          value={registerForm.name}
-          onChange={handleForm}
-          disabled={isRegisterFormDisabled}
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Digite seu nome"
-          required
-        />
-        <label htmlFor="email">Email:</label>
-        <input
-          value={registerForm.email}
-          onChange={handleForm}
-          disabled={isRegisterFormDisabled}
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Digite seu e-mail"
-          required
-        />
-        <label htmlFor="password">Senha:</label>
-        <input
-          value={registerForm.password}
-          onChange={handleForm}
-          disabled={isRegisterFormDisabled}
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Digite sua senha"
-          required
-        />
-        <button type="submit" disabled={isRegisterFormDisabled}>
-          {isRegisterFormDisabled ? "..." : "Entrar"}
-        </button>
-      </StyledForm>
-      <Link to={"/login"}>Já tem uma conta? Faça login!</Link>
     </MainContainer>
   );
 }
 
 const MainContainer = styled.div`
-  padding: 50px 25%;
+  background: url(${bgLogin}) center center no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  >div{
+    width: 400px;
+    height: 420px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+
+    >p{
+      width: 100%;
+      text-align: center;
+      font-weight: 700;
+      font-size: 28px;
+      color: rgb(51, 51, 51);
+      text-align: center;
+      margin-bottom: 15px;
+      margin-top: 20px;
+    }
+
+    >div{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+
+      >a{
+        color:#30775b;
+      }
+    }
+  }
 `;
 
 const StyledForm = styled.form`
-  display: flex;
+   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  >label{
+    width: 300px;
+    text-align: start;
+    font-size: 12px;
+    color: rgb(51, 51, 51);
+    line-height: 1.5;
+  }
+
+  >input{
+    width: 300px;
+    height: 35px;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    font-size: 14px;
+    border: none;
+    border-bottom: 2px solid #30775b;
+
+    :focus{
+      outline: none;
+    }
+
+    ::placeholder{
+      color: #30775b;
+    }
+  }
+`;
+
+const RegisterButton = styled(Button)`
+    width: 300px;
+    height: 40px;
 `;
