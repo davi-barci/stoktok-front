@@ -9,6 +9,7 @@ import axios from "axios";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import Footer from './components/Footer/Footer';
 import NavBar from'./components/NavBar/NavBar';
+import NotFound from "./pages/NotFoundPage/NotFound";
 
 export default function App() {
   const [user, setUser] = useState(
@@ -42,6 +43,7 @@ export default function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </ProductsContext.Provider>

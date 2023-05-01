@@ -5,6 +5,7 @@ export default function CarouselAutoplay(){
     const swiperRef = useRef(null);
 
     useEffect(() => {
+      window.scrollTo(0,0);
       const swiperContainer = swiperRef.current;
       const params = {
         slidesPerView: 1,

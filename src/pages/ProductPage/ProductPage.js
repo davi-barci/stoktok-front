@@ -18,6 +18,7 @@ export default function ProductPage(){
         .get(`${process.env.REACT_APP_API_URL}/`)
         .then((res) => {
           const product = res.data.filter((prod) => prod._id === id);
+          (product.length === 0) && navigate("/notfound")
           setProductSelected(product[0]);
         })
         .catch((err) => {
