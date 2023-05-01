@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import Logo from "../../assets/logo-stok-tok.png";
 import Options from "./Options";
+import {useNavigate} from "react-router-dom";
 
 export default function NavBar(){
+    const navigate = useNavigate();
+
     return(
         <ContainerNavBar>
-            <img src={Logo} alt="Logo Stok&Tok"/>
+            <img src={Logo} alt="Logo Stok&Tok" onClick={() => navigate("/")}/>
             <Options/>
         </ContainerNavBar>
     );
@@ -25,5 +28,6 @@ const ContainerNavBar = styled.div`
         width: 154px;
         height: 22px;
         margin-left: 25px;
+        cursor: pointer;
     }
 `;

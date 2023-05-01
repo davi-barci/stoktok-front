@@ -1,9 +1,16 @@
 import styled from "styled-components";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineArrowDown } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductCardMedium(props){
+    const navigate = useNavigate();
+
+    function selectProduct(id){
+        navigate(`/product/${id}`);
+    }
+
     return(
-        <ContainerProductCard>
+        <ContainerProductCard onClick={() => selectProduct(props.id)}>
             <div>
                 <AiOutlineHeart/>
             </div>
@@ -11,7 +18,12 @@ export default function ProductCardMedium(props){
             <p>{props.name}</p>
             <div>
                 <p>{`R$ ${Number(props.price).toFixed(2).replace('.', ',')}`}</p>
-                <div/>
+                {(Number(props.discount) != 0) &&
+                    <div>
+                        <p>{`${props.discount}%`}</p>
+                        <AiOutlineArrowDown/>
+                    </div>
+                }
             </div>
         </ContainerProductCard>
     );
@@ -26,6 +38,7 @@ const ContainerProductCard = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
+        cursor: pointer;
         -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
         -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
         box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
@@ -71,7 +84,7 @@ const ContainerProductCard = styled.div`
             justify-content: space-between;
             align-items: center;
 
-            p{
+            >p{
                 height: 16px;
                 font-family: 'Roboto', sans-serif;
                 font-style: normal;
@@ -87,6 +100,27 @@ const ContainerProductCard = styled.div`
                 background-color: green;
                 border-radius: 3px;
                 margin-right: 17px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                >p{
+                    font-family: 'Roboto', sans-serif;
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 12px;
+                    color: white;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: 3px;
+                }
+
+                >svg{
+                    color:white;
+                    font-size: 12px;
+                    
+                }
             }
         }   
 `;

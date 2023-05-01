@@ -68,7 +68,7 @@ export default function FeaturedDiscountProducts(){
             <swiper-container ref={swiperRef} init="false">
                   {(products !== null) && products.filter(prod => prod.category === "featured-discount").map((product, index) =>
                         <swiper-slide key={index}>
-                            <ProductCardLarge name={product.name} image={product.images[0]} price={product.price}/>
+                            <ProductCardLarge name={product.name} image={product.images[0]} price={product.price} id={product._id} discount={product.discount}/>
                         </swiper-slide> 
                   )}
             </swiper-container>
