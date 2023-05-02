@@ -39,7 +39,6 @@ export default function ProductPage() {
             <AiOutlineArrowRight />
             <p>{productSelected.name}</p>
           </div>
-
           <div>
             <div>
               <ProductImages images={productSelected.images} />
@@ -82,6 +81,7 @@ const ContainerProductPage = styled.div`
       color: #30775b;
       display: flex;
       align-items: center;
+      cursor: default;
     }
 
     > a {

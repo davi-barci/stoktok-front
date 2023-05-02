@@ -1,29 +1,26 @@
 import styled from "styled-components";
-import {
-  AiOutlineUser,
-  AiOutlineShoppingCart,
-  AiOutlineHeart,
-} from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import {AiOutlineUser, AiOutlineShoppingCart, AiOutlineHeart} from "react-icons/ai";
+import { useNavigate} from "react-router-dom";
 
-export default function Options() {
-  const navigate = useNavigate();
-  return (
-    <ContainerOptions>
-      <div onClick={() => navigate("/login")}>
-        <AiOutlineUser />
-        <p>Entre ou cadastre-se</p>
-      </div>
-      <div onClick={() => navigate("/cart")}>
-        <AiOutlineShoppingCart />
-        <p>Carrinho</p>
-      </div>
-      <div>
-        <AiOutlineHeart />
-        <p>Lista de Desejos</p>
-      </div>
-    </ContainerOptions>
-  );
+export default function Options(){
+    const navigate = useNavigate();
+
+    return (
+        <ContainerOptions>
+            <div onClick={() => navigate("/login")}>
+                <AiOutlineUser />
+                <p>Entre ou cadastre-se</p>
+            </div>
+            <div onClick={() => navigate("/cart")}>
+                <AiOutlineShoppingCart />
+                <p>Carrinho</p>
+            </div>
+            <div onClick={() => navigate("/wishlist")}>
+                <AiOutlineHeart/>
+                <p>Lista de Desejos</p>
+            </div>
+        </ContainerOptions>
+    );
 }
 
 const ContainerOptions = styled.div`

@@ -10,6 +10,7 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 import Footer from "./components/Footer/Footer";
 import NavBar from "./components/NavBar/NavBar";
 import NotFound from "./pages/NotFoundPage/NotFound";
+import WishlistPage from "./pages/WishlistPage/WishlistPage";
 import Cart from "./pages/CartPage/Cart";
 import Checkout from "./pages/CheckoutPage/Checkout";
 import Success from "./pages/SuccessPage/Success";
@@ -42,19 +43,20 @@ export default function App() {
     <BrowserRouter>
       <NavBar />
       <UserContext.Provider value={{ user, setUser }}>
-        <ProductsContext.Provider value={{ products, setProducts }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/success" element={<Success />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
-        </ProductsContext.Provider>
+      <ProductsContext.Provider value={{products, setProducts}}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/success" element={<Success />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </ProductsContext.Provider>
       </UserContext.Provider>
     </BrowserRouter>
   );
