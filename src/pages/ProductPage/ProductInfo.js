@@ -1,15 +1,102 @@
 import styled from "styled-components";
 import Button from '@mui/material/Button';
 import Rating from '@mui/material/Rating';
-import {AiOutlinePlusCircle, AiOutlineMinusCircle} from "react-icons/ai";
-import { useState } from "react";
+import {AiOutlinePlusCircle, AiOutlineMinusCircle, AiOutlineHeart, AiFillHeart} from "react-icons/ai";
+import { useState, useContext, useEffect} from "react";
+import { useNavigate} from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
+import axios from "axios";
 
 
 export default function ProductInfo(props){
     const [qtdProduct, setQtdProduct] = useState(1);
 
+    function handleBuyButton() {
+      const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      const newItem = {
+        ...props,
+        quantity: qtdProduct,
+      };
+  
+      const existingItem = cartItems.find((item) => item.id === newItem.id);
+      if (existingItem) {
+        existingItem.quantity += newItem.quantity;
+      } else {
+        cartItems.push(newItem);
+      }
+  
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      alert("Produto adicionado ao carrinho!");
+      setQtdProduct(1);
+    }
+
+    const navigate = useNavigate();
+    const [wishlist, setWishlist] = useState(false);
+    const {user} = useContext(UserContext);
+
+    useEffect(() => {
+        if (user === null) {
+          return;
+        } else {
+          axios
+            .get(`${process.env.REACT_APP_API_URL}/wishlist/${user._id}`)
+            .then((res) => {
+              if (res.data) { 
+                if (res.data.products.some((prod) => prod !== null && prod._id === props.id)) {
+                  setWishlist(true);
+                } else {
+                  setWishlist(false);
+                }
+              } else {
+                setWishlist(false);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              navigate("/");
+            });
+        }
+    }, [user]);
+
+
+    function wishlistProduct(event, id){
+        event.stopPropagation()
+        if(user === null) return navigate("/login");
+
+        console.log(wishlist);
+        if(wishlist){
+            axios
+            .put(`${process.env.REACT_APP_API_URL}/wishlist-del`, {idUsuario: user._id, idProduto: id})
+            .then((res) => {
+                setWishlist(false);
+                return;
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("Ocorreu um erro ao remover o produto da wishlist. Tente novamente...");
+                navigate("/");
+                return;
+            });
+        } else {
+            axios
+            .put(`${process.env.REACT_APP_API_URL}/wishlist-add`, {idUsuario: user._id, idProduto: id})
+            .then((res) => {
+                setWishlist(true);
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("Ocorreu um erro ao adicionar na wishlist. Tente novamente...");
+                navigate("/");
+            });
+        }
+    }
+
     return (
         <ContainerProductInfo>
+            {(wishlist) ? 
+                <AiFillHeart onClick={(event) => wishlistProduct(event, props.id)}/> :
+                <AiOutlineHeart onClick={(event) => wishlistProduct(event, props.id)}/>
+            }
             <p>{props.name.toUpperCase()}</p>
             <p>{`COR: ${props.color.toUpperCase()}`}</p>
             <div>
@@ -31,7 +118,7 @@ export default function ProductInfo(props){
                 </div>
             </div>
             <div>
-                <BuyButton variant="contained" style={{backgroundColor: "#30775b"}}>COMPRAR</BuyButton>
+                <BuyButton onClick={handleBuyButton} variant="contained" style={{backgroundColor: "#30775b"}}>COMPRAR</BuyButton>
             </div>
         </ContainerProductInfo>
     );
@@ -44,7 +131,18 @@ const ContainerProductInfo = styled.div`
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
+        position: relative;
 
+        >svg:nth-of-type(1){
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 20px;
+            color: red;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
 
         >p:nth-of-type(1){
             font-family: 'Roboto', sans-serif;

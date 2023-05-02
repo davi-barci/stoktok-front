@@ -32,7 +32,7 @@ export default function ProductPage() {
 
   return (
     <ContainerProductPage>
-      {productSelected !== null && (
+      {(productSelected !== null) && 
         <>
           <div>
             <Link to="/">Home</Link>
@@ -56,7 +56,7 @@ export default function ProductPage() {
                 </div>
             </div>
         </>
-            }
+      }
         </ContainerProductPage>
     );
 }

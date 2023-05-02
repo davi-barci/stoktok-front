@@ -41,8 +41,8 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
       <UserContext.Provider value={{ user, setUser }}>
+      <NavBar />
       <ProductsContext.Provider value={{products, setProducts}}>
         <Routes>
           <Route path="/" element={<Home />} />

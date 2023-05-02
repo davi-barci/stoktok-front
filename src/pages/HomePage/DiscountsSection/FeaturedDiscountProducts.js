@@ -88,6 +88,11 @@ const ContainerFeaturedProducts = styled.div`
             width: 445px;
             height: 100%;
             object-fit: cover;
+            transition: all 1s;
+
+            :hover{
+              transform: scale(1.03);
+            }
         }
 
         >div:nth-of-type(1){
@@ -101,6 +106,11 @@ const ContainerFeaturedProducts = styled.div`
                 width: 100%;
                 height: 220px;
                 object-fit: cover;
+                transition: all 1s;
+
+                :hover{
+                  transform: scale(1.03);
+                }
             }
         }
 `

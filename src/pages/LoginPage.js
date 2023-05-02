@@ -38,6 +38,8 @@ export default function LoginPage() {
     if (user !== null) {
       navigate("/");
     }
+
+    window.scrollTo(0,0);
   }, []);
 
   return (

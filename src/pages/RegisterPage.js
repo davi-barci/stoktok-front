@@ -1,11 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext, useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from '@mui/material/Button';
 import bgLogin from "../assets/bglogin.png";
+import UserContext from "../contexts/UserContext";
 
 export default function RegisterPage() {
+  const { user } = useContext(UserContext);
+
   const [registerForm, setRegisterForm] = useState({
     name: "",
     email: "",
@@ -31,6 +34,14 @@ export default function RegisterPage() {
         setRegisterFormDisabled(false);
       });
   }
+
+  useEffect(() => {
+    if (user !== null) {
+      navigate("/");
+    }
+
+    window.scrollTo(0,0);
+  }, []);
 
   return (
     <MainContainer>

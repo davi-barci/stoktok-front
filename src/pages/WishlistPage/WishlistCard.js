@@ -68,6 +68,25 @@ export default function WishlistCard(props){
         }
     }
 
+    function handleBuyButton() {
+        const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const newItem = {
+          ...props,
+          quantity: qtdProduct,
+        };
+    
+        const existingItem = cartItems.find((item) => item.id === newItem.id);
+        if (existingItem) {
+          existingItem.quantity += newItem.quantity;
+        } else {
+          cartItems.push(newItem);
+        }
+    
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        alert("Produto adicionado ao carrinho!");
+        setQtdProduct(1);
+      }
+
     return (
         <ContainerWishlistCard>
             <div>
@@ -76,11 +95,11 @@ export default function WishlistCard(props){
                     <AiOutlineHeart onClick={(event) => wishlistProduct(event, props.id)}/>
                 }
             </div>
-            <img src={props.image}/>
+            <img src={props.cartImage}/>
             <p>{props.name}</p>
             <p>{`R$ ${Number(props.price).toFixed(2).replace('.', ',')}`}</p>
             <div>
-                <BuyButton variant="contained" style={{backgroundColor: "#30775b", borderRadius: "10px", marginLeft: "17px"}}>COMPRAR</BuyButton>
+                <BuyButton variant="contained" onClick={handleBuyButton} style={{backgroundColor: "#30775b", borderRadius: "10px", marginLeft: "17px"}}>COMPRAR</BuyButton>
                 <div>
                     <AiOutlineMinusCircle onClick={() => (qtdProduct > 1) && setQtdProduct(qtdProduct-1)}/>
                     <div>{qtdProduct}</div>
