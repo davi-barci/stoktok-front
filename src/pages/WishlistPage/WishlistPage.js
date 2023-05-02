@@ -5,12 +5,14 @@ import { useNavigate, Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import WishlistCard from "./WishlistCard";
 import axios from "axios";
+import loadingGif from "../../assets/Spinner-1s-200px.gif";
 
 
 export default function WishlistPage(){
     const {user} = useContext(UserContext);
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if(user === null) {
@@ -22,6 +24,7 @@ export default function WishlistPage(){
                 if (res.data) {
                     setProducts(res.data.products);
                 }
+                setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
@@ -46,9 +49,10 @@ export default function WishlistPage(){
             </div>
 
             <div>
-                {(products.length === 0) ?
+                {(loading) ? <img src={loadingGif}/> :
+                (products.length === 0) ?
                     <p>Você ainda não tem nenhum produto na lista de desejos!</p> :
-                    products.map((prod, index) => (prod !== null) && <WishlistCard key={index} id={prod._id} image={prod.images[0]} name={prod.name} price={prod.price}/>)
+                    products.map((prod, index) => (prod !== null) && <WishlistCard key={index} id={prod._id} cartImage={prod.images[0]} name={prod.name} price={prod.price}/>)
                 }
             </div>
         </ContainerWishlist>
@@ -146,6 +150,12 @@ const ContainerWishlist = styled.div`
             font-weight: 700;
             font-size: 30px;
             color: #30775B;
+        }
+
+        >img{
+            width: 200px;
+            height: 200px;
+            margin: auto;
         }
     }
 `;
