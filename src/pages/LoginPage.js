@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import UserContext from "../contexts/UserContext";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import bgLogin from "../assets/bglogin.png";
 
 export default function LoginPage() {
@@ -25,7 +25,7 @@ export default function LoginPage() {
       .then((res) => {
         localStorage.setItem("user", JSON.stringify(res.data));
         setUser(res.data);
-        navigate("/success");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -67,7 +67,15 @@ export default function LoginPage() {
             placeholder="Digite sua senha"
             required
           />
-          <LoginButton type="submit" disabled={isLoginFormDisabled} style={{backgroundColor: "#30775b", color:"white", marginBottom: "25px"}}>
+          <LoginButton
+            type="submit"
+            disabled={isLoginFormDisabled}
+            style={{
+              backgroundColor: "#30775b",
+              color: "white",
+              marginBottom: "25px",
+            }}
+          >
             {isLoginFormDisabled ? "..." : "Entrar"}
           </LoginButton>
         </StyledForm>
@@ -88,16 +96,16 @@ const MainContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  >div{
+  > div {
     width: 400px;
     height: 330px;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 5px;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 
-    >p{
+    > p {
       width: 100%;
       text-align: center;
       font-weight: 700;
@@ -108,13 +116,13 @@ const MainContainer = styled.div`
       margin-top: 20px;
     }
 
-    >div{
+    > div {
       width: 100%;
       display: flex;
       justify-content: center;
 
-      >a{
-        color:#30775b;
+      > a {
+        color: #30775b;
       }
     }
   }
@@ -125,7 +133,7 @@ const StyledForm = styled.form`
   flex-direction: column;
   align-items: center;
 
-  >label{
+  > label {
     width: 300px;
     text-align: start;
     font-size: 12px;
@@ -133,7 +141,7 @@ const StyledForm = styled.form`
     line-height: 1.5;
   }
 
-  >input{
+  > input {
     width: 300px;
     height: 35px;
     box-sizing: border-box;
@@ -142,17 +150,17 @@ const StyledForm = styled.form`
     border: none;
     border-bottom: 2px solid #30775b;
 
-    :focus{
+    :focus {
       outline: none;
     }
 
-    ::placeholder{
+    ::placeholder {
       color: #30775b;
     }
   }
 `;
 
 const LoginButton = styled(Button)`
-    width: 300px;
-    height: 40px;
+  width: 300px;
+  height: 40px;
 `;

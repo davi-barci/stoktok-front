@@ -7,9 +7,12 @@ import ProductsContext from "./contexts/Products.Context";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ProductPage from "./pages/ProductPage/ProductPage";
-import Footer from './components/Footer/Footer';
-import NavBar from'./components/NavBar/NavBar';
+import Footer from "./components/Footer/Footer";
+import NavBar from "./components/NavBar/NavBar";
 import NotFound from "./pages/NotFoundPage/NotFound";
+import Cart from "./pages/CartPage/Cart";
+import Checkout from "./pages/CheckoutPage/Checkout";
+import Success from "./pages/SuccessPage/Success";
 
 export default function App() {
   const [user, setUser] = useState(
@@ -28,7 +31,9 @@ export default function App() {
       })
       .catch((err) => {
         console.log(err);
-        alert("Ocorreu um erro durante a recuperação dos produtos. Por favor, tente novamente");
+        alert(
+          "Ocorreu um erro durante a recuperação dos produtos. Por favor, tente novamente"
+        );
         window.location.reload();
       });
   }, []);
@@ -37,16 +42,19 @@ export default function App() {
     <BrowserRouter>
       <NavBar />
       <UserContext.Provider value={{ user, setUser }}>
-      <ProductsContext.Provider value={{products, setProducts}}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </ProductsContext.Provider>
+        <ProductsContext.Provider value={{ products, setProducts }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </ProductsContext.Provider>
       </UserContext.Provider>
     </BrowserRouter>
   );

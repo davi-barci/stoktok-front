@@ -78,6 +78,7 @@ const ContainerAllImages = styled.div`
         -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
         -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
         box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+        cursor: pointer;
     }
 
 `;
@@ -102,6 +103,7 @@ const ContainerSelectedImage = styled.div`
         -webkit-transition: all 1s ease-out;
         -moz-transition: all 1s ease-out;
         transition: all 1s ease-out;
+        cursor: zoom-in;
     }
 
     >div:nth-of-type(2){
@@ -116,5 +118,6 @@ const ContainerSelectedImage = styled.div`
         background-position: ${props => `${100 * (props.mousePosition.x - props.imgOffsetLeft) / props.imgWidth}% ${100 * (props.mousePosition.y - props.imgOffsetTop) / props.imgHeight}%`};
         left: ${props => `${props.mousePosition.x - props.glassDimension / 2}px`};
         top: ${props => `${props.mousePosition.y - props.glassDimension / 2}px`};
+        
     }
 `;
