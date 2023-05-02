@@ -25,7 +25,7 @@ export default function LoginPage() {
       .then((res) => {
         localStorage.setItem("user", JSON.stringify(res.data));
         setUser(res.data);
-        navigate("/success");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);

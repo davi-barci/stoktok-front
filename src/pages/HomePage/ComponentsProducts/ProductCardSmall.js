@@ -1,18 +1,82 @@
 import styled from "styled-components";
-import { AiOutlineHeart, AiOutlineArrowDown } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineArrowDown, AiFillHeart} from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import {useState, useContext, useEffect} from "react";
+import UserContext from "../../../contexts/UserContext";
+import axios from "axios";
 
 export default function ProductCardSmall(props){
     const navigate = useNavigate();
+    const [wishlist, setWishlist] = useState(false);
+    const {user} = useContext(UserContext);
+
+
+    useEffect(() => {
+        if (user === null) {
+          return;
+        } else {
+          axios
+            .get(`${process.env.REACT_APP_API_URL}/wishlist/${user._id}`)
+            .then((res) => {
+              if (res.data && res.data.products) { // verifique se res.data e res.data.products não são null
+                if (res.data.products.some((prod) => prod !== null && prod._id === props.id)) {
+                  setWishlist(true);
+                } else {
+                  setWishlist(false);
+                }
+              } else {
+                setWishlist(false);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              navigate("/");
+            });
+        }
+    }, [user]);
 
     function selectProduct(id){
         navigate(`/product/${id}`);
     }
 
+    function wishlistProduct(event, id){
+        event.stopPropagation()
+        if(user === null) return navigate("/login");
+
+        if(wishlist){
+            axios
+            .put(`${process.env.REACT_APP_API_URL}/wishlist-del`, {idUsuario: user._id, idProduto: id})
+            .then((res) => {
+                setWishlist(false);
+                return;
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("Ocorreu um erro ao remover o produto da wishlist. Tente novamente...");
+                navigate("/");
+                return;
+            });
+        } else {
+            axios
+            .put(`${process.env.REACT_APP_API_URL}/wishlist-add`, {idUsuario: user._id, idProduto: id})
+            .then((res) => {
+                setWishlist(true);
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("Ocorreu um erro ao adicionar na wishlist. Tente novamente...");
+                navigate("/");
+            });
+        }
+    }
+
     return(
         <ContainerProductCard onClick={() => selectProduct(props.id)}>
             <div>
-                <AiOutlineHeart/>
+                {(wishlist) ? 
+                    <AiFillHeart onClick={(event) => wishlistProduct(event, props.id)}/> :
+                    <AiOutlineHeart onClick={(event) => wishlistProduct(event, props.id)}/>
+                }
             </div>
             <img src={props.image}/>
             <p>{props.name}</p>
@@ -56,6 +120,7 @@ const ContainerProductCard = styled.div`
                 font-size: 20px;
                 margin-right: 10px;
                 color: red;
+                height: 100%;
             }
         }
 

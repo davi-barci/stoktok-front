@@ -50,6 +50,7 @@ export default function ProductPage(){
                                 price={productSelected.price}
                                 description={productSelected.description}
                                 discount={productSelected.discount}
+                                id={productSelected._id}
                             />
                         </div>
                 </div>
@@ -79,6 +80,7 @@ const ContainerProductPage = styled.div`
             color: #30775B;
             display: flex;
             align-items: center;
+            cursor: default;
         }
 
         >a{

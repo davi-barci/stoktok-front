@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import {AiOutlineUser, AiOutlineShoppingCart, AiOutlineHeart} from "react-icons/ai";
+import { useNavigate} from "react-router-dom";
 
 export default function Options(){
+    const navigate = useNavigate();
+
     return (
         <ContainerOptions>
             <div>
@@ -12,7 +15,7 @@ export default function Options(){
                 <AiOutlineShoppingCart/>
                 <p>Carrinho</p>
             </div>
-            <div>
+            <div onClick={() => navigate("/wishlist")}>
                 <AiOutlineHeart/>
                 <p>Lista de Desejos</p>
             </div>
