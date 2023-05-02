@@ -39,30 +39,30 @@ export default function ProductPage() {
             <AiOutlineArrowRight />
             <p>{productSelected.name}</p>
           </div>
+          <div>
             <div>
-                <div>
-                    <ProductImages images={productSelected.images}/>
-                    <ProductInfo 
-                        name={productSelected.name}
-                        color={productSelected.color}
-                        rating={productSelected.rating}
-                        numReviews={productSelected.numReviews}
-                        price={productSelected.price}
-                        description={productSelected.description}
-                        discount={productSelected.discount}
-                        id={productSelected._id}
-                        cartImage={productSelected.images[0]}
-                    />
-                </div>
+              <ProductImages images={productSelected.images} />
+              <ProductInfo
+                name={productSelected.name}
+                color={productSelected.color}
+                rating={productSelected.rating}
+                numReviews={productSelected.numReviews}
+                price={productSelected.price}
+                description={productSelected.description}
+                discount={productSelected.discount}
+                id={productSelected._id}
+                cartImage={productSelected.images[0]}
+              />
             </div>
+          </div>
         </>
-            }
-        </ContainerProductPage>
-    );
+      )}
+    </ContainerProductPage>
+  );
 }
 
 const ContainerProductPage = styled.div`
-  >div:nth-of-type(1) {
+  > div:nth-of-type(1) {
     width: 100%;
     height: 36px;
     margin-top: 30px;
@@ -71,20 +71,20 @@ const ContainerProductPage = styled.div`
     justify-content: flex-start;
     align-items: center;
 
-    >p{
-        height: 100%;
-        font-family: 'Roboto', sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        margin-left: 10px;
-        color: #30775B;
-        display: flex;
-        align-items: center;
-        cursor: default;
+    > p {
+      height: 100%;
+      font-family: "Roboto", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      margin-left: 10px;
+      color: #30775b;
+      display: flex;
+      align-items: center;
+      cursor: default;
     }
 
-    >a {
+    > a {
       height: 100%;
       font-family: "Roboto", sans-serif;
       font-style: normal;
@@ -97,20 +97,20 @@ const ContainerProductPage = styled.div`
       text-decoration: none;
     }
 
-    >svg {
+    > svg {
       margin-left: 10px;
       color: #30775b;
     }
   }
 
-  >div:nth-of-type(2) {
+  > div:nth-of-type(2) {
     width: 100%;
     height: 600px;
     background-color: white;
     display: flex;
     justify-content: center;
 
-    >div {
+    > div {
       width: 1170px;
       height: 509px;
       background: #ffffff;
