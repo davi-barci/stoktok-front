@@ -4,7 +4,8 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import {BsFillBagCheckFill} from "react-icons/bs";
 import Button from "@mui/material/Button";
 import { useContext, useEffect } from "react";
-import UserContext from "../contexts/UserContext";
+import UserContext from "../../contexts/UserContext";
+import axios from "axios";
 
 export default function Success() {
   const navigate = useNavigate();
