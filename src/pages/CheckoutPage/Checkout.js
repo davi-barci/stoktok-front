@@ -79,7 +79,7 @@ export default function Checkout() {
                   <label htmlFor="cep">CEP:</label>
                   <InputMask
                     mask="99999-999"
-                    maxlength="8"
+                    minlength="8"
                     value={checkoutForm.cep}
                     onChange={handleForm}
                     disabled={isRegisterFormDisabled}
@@ -114,7 +114,7 @@ export default function Checkout() {
                   <label htmlFor="phone">Telefone:</label>
                   <InputMask
                     mask="(99) 99999-9999"
-                    maxlength="11"
+                    minlength="11"
                     value={checkoutForm.phone}
                     onChange={handleForm}
                     disabled={isRegisterFormDisabled}
@@ -138,7 +138,7 @@ export default function Checkout() {
                 <label htmlFor="cardNumber">Número do Cartão:</label>
                 <InputMask
                   mask="9999 9999 9999 9999"
-                  maxlength="16"
+                  minlength="16"
                   value={checkoutForm.cardNumber}
                   onChange={handleForm}
                   disabled={isRegisterFormDisabled}
@@ -151,7 +151,7 @@ export default function Checkout() {
                 <label htmlFor="expirationDate">Data de Expiração:</label>
                 <InputMask
                   mask="99/99"
-                  maxlength="4"
+                  minlength="4"
                   value={checkoutForm.expirationDate}
                   onChange={handleForm}
                   disabled={isRegisterFormDisabled}
@@ -174,7 +174,7 @@ export default function Checkout() {
                 <label htmlFor="cvv">CVV:</label>
                 <InputMask
                   mask="999"
-                  maxlength="3"
+                  minlength="3"
                   value={checkoutForm.cvv}
                   onChange={handleForm}
                   disabled={isRegisterFormDisabled}
